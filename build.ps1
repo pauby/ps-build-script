@@ -94,7 +94,7 @@ task InstallDependencies {
         # check the package is NOT installed already
         if (!(Invoke-Command -Command $_.assert)) {
             Write-Verbose "Installing '$($_.package)' package."
-            choco install $_.package -y
+            choco install $_.package -y --no-progress
             if ($LASTEXITCODE -ne 0) {
                 throw "Failed to install Chocolatey package '$_'."
             }
