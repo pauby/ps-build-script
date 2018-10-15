@@ -84,15 +84,15 @@ task InstallDependencies {
     @(
         @{
             package = 'pandoc'
-            assert  = [scriptblock] { [bool](Get-Command -Name 'pandoc') }
+            assert  = [scriptblock] { [bool](Get-Command -Name 'pandoc' -ErrorAction SilentlyContinue ) }
         },
         @{
             package = '7Zip'
-            assert  = [scriptblock] { [bool](Get-Command -Name '7zfm') }
+            assert  = [scriptblock] { [bool](Get-Command -Name '7zfm' -ErrorAction SilentlyContinue ) }
         }
     ) | ForEach-Object {
         # check the package is NOT installed already
-        if (!$_.assert) {
+        if (!(Invoke-Command -Command $_.assert)) {
             Write-Verbose "Installing '$($_.package)' package."
             choco install $_.package -y
             if ($LASTEXITCODE -ne 0) {
