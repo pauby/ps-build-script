@@ -22,7 +22,7 @@ $ManifestOptions = @{
                             -ChildPath "public\*.ps1") -Recurse).BaseName
 }
 
-Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/pauby/ps-build-script/master/.build.ps1' -OutFile '.build.ps1'
+Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/pauby/ps-build-script/master/build.ps1' -OutFile 'build.ps1'
 
 . .\build.ps1
 
