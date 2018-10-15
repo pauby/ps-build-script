@@ -75,6 +75,9 @@ task InstallDependencies {
             throw 'Could not install Chocolatey.'
         }
     }
+    else {
+        Write-Verbose "Chocolatey already installed."
+    }
 
     # Chocolatey is installed
     $packageInstalled = $false
@@ -96,6 +99,9 @@ task InstallDependencies {
                 throw "Failed to install Chocolatey package '$_'."
             }
             $packageInstalled = $true
+        }
+        else {
+            Write-Verbose "Chocolatey package '$($_.package)' already installed. Skipping."
         }
     }
 
