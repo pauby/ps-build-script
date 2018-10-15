@@ -159,7 +159,7 @@ task Version {
 
 # Synopsis: Convert markdown files to HTML.
 # <http://johnmacfarlane.net/pandoc/>
-task MakeHTMLDocs -If { [bool](exec { pandoc.exe --help }) } {
+task MakeHTMLDocs -If { [bool](Get-Command -Name 'pandoc') } {
     ForEach ($name in $BuildConfig.MDConvert) {
         $sourcePath = Join-Path -Path $BuildRoot -ChildPath $name
         if (Test-Path $sourcePath) {
